@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "CommonJS",
+    "target": "es5",
+    "sourceMap": true,
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "removeComments": true,
+  },
+  "include": ["src/main/*.ts"],
+}
