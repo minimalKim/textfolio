@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+
+import { useDispatch } from 'react-redux';
+
 import { signInUser } from '../features/auth/actions';
 import useForm from '../hooks/useForm';
 
@@ -12,19 +14,29 @@ export function SignInForm() {
   const dispatch = useDispatch();
   const { values, errors, isLoading, handleChange, handleSubmit } = useForm<FormValue>({
     initialValues: { email: '', password: '' },
-    onSubmit: async (values) => {
-      dispatch(signInUser(values));
-    },
+    onSubmit: (values) => dispatch(signInUser(values)),
   });
 
   return (
     <div>
       <h2>Sign in</h2>
       <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input type='email' name='email' onChange={handleChange} value={values.email} />
-        <label>Password</label>
-        <input type='password' name='password' onChange={handleChange} value={values.password} />
+        <label htmlFor='email'>
+          Email
+          <input type='email' id='email' name='email' value={values.email} onChange={handleChange} />
+        </label>
+
+        <label htmlFor='password'>
+          Password
+          <input
+            type='password'
+            id='password'
+            name='password'
+            value={values.password}
+            onChange={handleChange}
+          />
+        </label>
+
         <button type='submit'>Sign in</button>
         {isLoading ? 'loading...' : ''}
       </form>

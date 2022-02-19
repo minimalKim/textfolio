@@ -44,14 +44,20 @@
     "import/order": [
       "error",
       {
+        "groups": ["builtin", "external", "internal"],
         "pathGroups": [
           {
             "pattern": "react",
-            "group": "builtin",
+            "group": "external",
             "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react"]
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
       }
     ]
   },
@@ -60,7 +66,10 @@
       "@typescript-eslint/parser": [".ts", ".tsx", ".js"]
     },
     "import/resolver": {
-      "typescript": "./tsconfig.json"
-    }
+      "typescript": {
+        "alwaysTryTypes": true // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+      },
+      "project" : "./tsconfig.json"
+    } 
   }
 }

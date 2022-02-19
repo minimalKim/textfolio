@@ -1,12 +1,14 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+
 import { signInUser } from './actions';
 
-type User = {
-  uid: string;
-  username: string;
-  email: string;
-  avatar: string;
-};
+// type User = {
+//   uid: string;
+//   username: string;
+//   email: string;
+//   avatar: string;
+// };
 
 type SignIn = {
   error: string | null;
@@ -31,11 +33,10 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(signInUser.pending, (state, action) => {
+    builder.addCase(signInUser.pending, (state) => {
       state.signIn.isLoading = true;
     });
     builder.addCase(signInUser.fulfilled, (state, { payload }) => {
-      console.log(payload);
       state.user = payload;
       state.signIn.isLoading = false;
     });

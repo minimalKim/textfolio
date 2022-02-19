@@ -7,7 +7,6 @@ type useFormProps<T> = {
 };
 
 const checkInitialValuesHasEmail = <T>(initialValues: T): boolean => 'email' in initialValues;
-
 const checkInitialValuesHasPassword = <T>(initialValues: T): boolean => 'password' in initialValues;
 
 const defaultEmailValidate = <T extends { email: string }>({ email }: T): Partial<T> => {
@@ -28,7 +27,7 @@ const defaultPasswordValidate = <T extends { password: string }>({ password }: T
   if (!passwordAsteriskRegex.test(password))
     errors.password = '비밀번호에 특수문자(!@#$%^*+=-) 중 하나를 포함해주세요';
   if (!passwordRegex.test(password))
-    errors.password = '6 ~ 16자 사이의 영문 + 숫자 + 특수문자 조합의 비밀번호를 입력해 주세요';
+    errors.password = '6 ~ 16자의 영문 + 숫자 + 특수문자(!@#$%^*+=-) 조합의 비밀번호를 입력해 주세요';
 
   return errors;
 };
@@ -79,4 +78,5 @@ const useForm = <T extends { [key: string]: string }>({
     handleSubmit,
   };
 };
+
 export default useForm;

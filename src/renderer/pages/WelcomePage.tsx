@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { SignInForm } from '../components/SignInForm';
 import { SignUpForm } from '../components/SignUpForm';
 
@@ -11,7 +12,9 @@ export default function WelcomePage() {
       {isSignInPage ? <SignInForm /> : <SignUpForm />}
       <div>
         <span>{optionInText[0]}</span>
-        <span onClick={() => setIsSignInPage(!isSignInPage)}>{optionInText[1]}</span>
+        <button type='button' onClick={() => setIsSignInPage(!isSignInPage)}>
+          {optionInText[1]}
+        </button>
       </div>
     </div>
   );
