@@ -71,5 +71,9 @@
       },
       "project" : "./tsconfig.json"
     } 
-  }
+  },
+  "ignorePatterns": [
+    "build/",
+    "**/*.html"
+  ]
 }

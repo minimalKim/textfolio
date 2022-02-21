@@ -1,5 +1,7 @@
-const { app, BrowserWindow } = require('electron');
 const path = require('path');
+
+const { app, BrowserWindow } = require('electron');
+
 const isDev = !app.isPackaged;
 
 const createWindow = () => {
@@ -7,19 +9,20 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      // preload: path.join(__dirname, 'preload.js'),
     },
   });
 
-  win.loadFile(path.join(__dirname, 'index.html'));
+  win.loadFile('./build/index.html');
+  // eslint-disable-next-line no-unused-expressions
   isDev && win.webContents.openDevTools();
 };
 
-if (isDev) {
-  require('electron-reload')(__dirname, {
-    electron: path.join(__dirname, '..', 'node_modules', '.bin', 'electron'),
-  });
-}
+// if (isDev) {
+//   require('electron-reload')(__dirname, {
+//     electron: path.join(__dirname, '..', 'node_modules', '.bin', 'electron'),
+//   });
+// }
 
 app.whenReady().then(() => {
   createWindow();

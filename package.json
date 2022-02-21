@@ -6,7 +6,9 @@
   "scripts": {
     "watch": "webpack --watch --mode=development",
     "build": "webpack --mode=development && tsc",
-    "start:react": "webpack serve --open --mode=development",
+    "build:main": "webpack --config ./webpack.main.js --mode=development",
+    "build:renderer": "webpack --config ./webpack.renderer.js --mode=production",
+    "start:react": "webpack serve --open --mode=development --config ./webpack.renderer.js",
     "start:electron": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",

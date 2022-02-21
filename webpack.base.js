@@ -2,12 +2,6 @@ const path = require('path');
 
 const Dotenv = require('dotenv-webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-// const { IgnorePlugin } = require('webpack');
-
-// // const optionalPlugins = [];
-// // if (process.platform !== 'darwin') {
-// //   optionalPlugins.push(new IgnorePlugin({ resourceRegExp: /^fsevents$/ }));
-// // }
 
 module.exports = {
   output: {
@@ -50,6 +44,9 @@ module.exports = {
         type: 'asset/resource',
       },
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.jsx', '.js'],
   },
   plugins: [new ForkTsCheckerWebpackPlugin(), new Dotenv()],
   devtool: 'inline-source-map',
