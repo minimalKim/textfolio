@@ -1,5 +1,11 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import {
+  createUserWithEmailAndPassword,
+  NextOrObserver,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  User,
+} from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 import { auth, db } from '../../db/firestore';
 
@@ -35,3 +41,8 @@ export const signUp = async ({ email, password, username, avatar }: SignUpApiDat
 const createUserProfile = async (userProfile: UserProfileApiData) => {
   await setDoc(doc(db, 'profiles', userProfile.uid), userProfile);
 };
+
+export const getUserProfile = (uid: string) =>
+  getDoc(doc(db, 'profiles', uid)).then((snapshot) => snapshot.data());
+
+export const onAuthStateChanges = (onAuth: NextOrObserver<User>) => onAuthStateChanged(auth, onAuth);
