@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
+// eslint-disable-next-line import/no-cycle
 import { signInUser } from './actions';
 
 // type User = {
@@ -28,10 +29,14 @@ const initialState: AuthState = {
   },
 };
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    updateUser: (state, action) => {
+      state.user = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(signInUser.pending, (state) => {
       state.signIn.isLoading = true;
@@ -44,7 +49,13 @@ export const authSlice = createSlice({
       if (error.code) state.signIn.error = error.code;
       state.signIn.isLoading = false;
     });
+    // builder.addCase(listenToAuthChanges.pending, (state) => {
+    //   //
+    // });
+    // builder.addCase(listenToAuthChanges.fulfilled, (state, { payload }) => {
+    //   console.log(payload);
+    // });
   },
 });
-
+export const { updateUser } = authSlice.actions;
 export default authSlice.reducer;
