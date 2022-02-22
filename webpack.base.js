@@ -1,17 +1,14 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 const Dotenv = require('dotenv-webpack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
-  entry: {
-    renderer: './src/renderer/index.tsx',
-  },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'build'),
-    clean: true,
   },
+  target: 'node',
   module: {
     rules: [
       {
@@ -48,18 +45,9 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/renderer/index.html',
-    }),
-    new ForkTsCheckerWebpackPlugin(),
-    new Dotenv(),
-  ],
-  devtool: 'inline-source-map',
-  devServer: {
-    static: './build',
-  },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.jsx', '.js'],
   },
+  plugins: [new ForkTsCheckerWebpackPlugin(), new Dotenv()],
+  devtool: 'inline-source-map',
 };
