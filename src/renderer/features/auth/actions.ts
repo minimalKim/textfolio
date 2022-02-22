@@ -21,17 +21,3 @@ export const signInUser = createAsyncThunk(`auth/signIn`, async (formData: SignI
 export const signUpUser = createAsyncThunk(`auth/signUp`, (formData: SignUpFormData) => {
   api.signUp(formData);
 });
-
-// export const listenToAuthChanges = createAsyncThunk(`auth/change`, async () => {
-//   const auth = getAuth();
-//   let userProfile = null;
-//   await onAuthStateChanged(auth, async (user) => {
-//     if (user) {
-//       userProfile = await api.getUserProfile(user.uid);
-//     } else {
-//       userProfile = null;
-//     }
-//   });
-//   console.log(userProfile);
-//   return userProfile;
-// });

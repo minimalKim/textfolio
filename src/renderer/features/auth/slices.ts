@@ -49,12 +49,6 @@ const authSlice = createSlice({
       if (error.code) state.signIn.error = error.code;
       state.signIn.isLoading = false;
     });
-    // builder.addCase(listenToAuthChanges.pending, (state) => {
-    //   //
-    // });
-    // builder.addCase(listenToAuthChanges.fulfilled, (state, { payload }) => {
-    //   console.log(payload);
-    // });
   },
 });
 export const { updateUser } = authSlice.actions;
