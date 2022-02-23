@@ -19,7 +19,7 @@ export default function Card({
   padding = 6,
   bgColor,
   maxW = 'sm',
-  style: _style,
+  style: styleProps,
 }: CardProps) {
   const theme = useTheme();
 
@@ -30,11 +30,8 @@ export default function Card({
     max-width: ${theme.size[maxW]};
     display: flex;
     justify-content: center;
+    styleProps
   `;
 
-  return (
-    <div css={style} style={{ ..._style }}>
-      {children}
-    </div>
-  );
+  return <div css={style}>{children}</div>;
 }
