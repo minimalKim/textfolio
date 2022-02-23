@@ -32,22 +32,22 @@ export default function Text({
   // eslint-disable-next-line default-case
   switch (size) {
     case 'sm':
-      size = '14px';
+      size = '0.875rem';
       break;
     case 'md':
-      size = '16px';
+      size = '1rem';
       break;
     case 'lg':
-      size = '18px';
+      size = '1.125rem';
       break;
     case 'xl':
-      size = '20px';
+      size = '1.25rem';
       break;
     case '2xl':
-      size = '24px';
+      size = '1.5rem';
       break;
     case '3xl':
-      size = '30px';
+      size = '1.875rem';
       break;
   }
 
