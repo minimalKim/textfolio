@@ -1,7 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import { css, useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 
 import { Radius, Size, Space } from '../../../styles/emotion';
 

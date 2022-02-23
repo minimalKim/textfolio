@@ -6,7 +6,6 @@
     "target": "es5",
     "sourceMap": true,
     "jsx": "react",
-    "jsxImportSource": "@emotion/react",
     "allowJs": true,
     "moduleResolution": "node",
     "removeComments": true,
