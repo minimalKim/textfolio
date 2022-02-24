@@ -1,4 +1,4 @@
-import React, { SVGProps, useEffect, useState } from 'react';
+import React, { SVGProps, useState } from 'react';
 
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -57,8 +57,6 @@ function ChangeToPageName(currentPage: string): PageName {
 export default function SideNavBar({ currentPage }: SideNavBarProps) {
   const [selectedNavItem, setSelectedNavItem] = useState<PageName>(ChangeToPageName(currentPage));
   const navigate = useNavigate();
-
-  useEffect(() => console.log(currentPage, ChangeToPageName(currentPage)), [currentPage]);
 
   const onItemClick = (url: PathName, pageName: PageName) => {
     navigate(url);
