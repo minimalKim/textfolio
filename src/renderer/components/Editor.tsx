@@ -56,7 +56,6 @@ export default function Editor() {
     updatedBlocks[currentBlockIndex - 1].isFocus = true;
 
     setBlocks(updatedBlocks);
-
     return isDisabled;
   };
 
