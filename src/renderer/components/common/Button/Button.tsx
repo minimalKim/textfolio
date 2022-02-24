@@ -1,20 +1,34 @@
-import React from 'react';
+// /** @jsxImportSource @emotion/react */
+import React, { PropsWithChildren } from 'react';
 
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 
-type ButtonProps = {
-  children: React.ReactNode;
+type ButtonProps = PropsWithChildren<{
   theme?: 'primary' | 'secondary' | 'tertiary';
   size?: 'sm' | 'md' | 'lg';
   width?: string | number;
   disabled?: boolean;
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
-};
+  style?: React.CSSProperties;
+}>;
 
-function Button({ children, theme = 'primary', size = 'md', width, disabled = false, onClick }: ButtonProps) {
+function Button({
+  children,
+  theme = 'primary',
+  size = 'md',
+  width,
+  disabled = false,
+  onClick,
+  style: styleProps,
+}: ButtonProps) {
   return (
     // eslint-disable-next-line react/button-has-type
-    <button css={[style, themes[theme], sizes[size], { width }]} disabled={disabled} onClick={onClick}>
+    <button
+      css={[style, themes[theme], sizes[size], { width }]}
+      disabled={disabled}
+      onClick={onClick}
+      style={styleProps}
+    >
       {children}
     </button>
   );
@@ -26,16 +40,16 @@ const style = css`
   box-sizing: border-box;
   height: 2rem;
   font-size: 0.875rem;
-  padding: 0 1rem;
-  border-radius: 0.25rem;
+  padding: 0.875rem;
+  border-radius: 0.4rem;
   line-height: 1;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  &:focus {
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
-  }
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+
   &:disabled {
     cursor: not-allowed;
     background: #d4d4d4;
@@ -53,15 +67,21 @@ const themes = {
     &:active:enabled {
       background: #e6410c;
     }
+    &:focus {
+      outline: 4px solid rgba(243, 96, 49, 0.2);
+    }
   `,
   secondary: css`
-    background: #e9ecef;
-    color: #343a40;
+    background: #edf2f7;
+    color: #718096;
     &:hover:enabled {
-      background: #f1f3f5;
+      background: #e2e8f0;
     }
     &:active:enabled {
-      background: #dee2e6;
+      background: #cbd5e0;
+    }
+    &:focus {
+      outline: 4px solid rgba(203, 213, 224, 0.2);
     }
   `,
   tertiary: css`

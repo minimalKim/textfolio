@@ -47,6 +47,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src/renderer'),
+    },
   },
   plugins: [new ForkTsCheckerWebpackPlugin(), new Dotenv()],
   devtool: 'inline-source-map',

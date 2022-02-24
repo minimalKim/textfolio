@@ -1,7 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import { css, useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 
 import { Radius, Size, Space } from '../../../styles/emotion';
 
@@ -11,7 +10,7 @@ export type CardProps = {
   padding?: keyof Space;
   maxW?: keyof Size;
   bgColor?: string;
-  style: any;
+  style?: React.CSSProperties;
 };
 
 export default function Card({
@@ -20,7 +19,7 @@ export default function Card({
   padding = 6,
   bgColor,
   maxW = 'sm',
-  style: _style,
+  style: styleProps,
 }: CardProps) {
   const theme = useTheme();
 
@@ -31,11 +30,8 @@ export default function Card({
     max-width: ${theme.size[maxW]};
     display: flex;
     justify-content: center;
+    ${{ ...styleProps }}
   `;
 
-  return (
-    <div css={style} style={{ ..._style }}>
-      {children}
-    </div>
-  );
+  return <div css={style}>{children}</div>;
 }
