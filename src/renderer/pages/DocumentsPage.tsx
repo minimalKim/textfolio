@@ -1,5 +1,11 @@
 import React from 'react';
 
+import Editor from '../components/Editor';
+
 export default function DocumentsPage() {
-  return <div>Documents</div>;
+  return (
+    <div>
+      <Editor />
+    </div>
+  );
 }
