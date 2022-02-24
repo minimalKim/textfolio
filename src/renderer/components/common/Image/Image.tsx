@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-expressions */
+// /** @jsxImportSource @emotion/react */
+
 import React, { useRef, useState, useEffect } from 'react';
 
 import { css } from '@emotion/react';
@@ -7,13 +9,13 @@ export type ImageProps = {
   src: string;
   alt: string;
   placeholder?: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   threshold?: number;
   lazy?: boolean;
   mode?: 'cover' | 'fill' | 'contain';
   block?: boolean;
-  style: any;
+  style?: React.CSSProperties;
 };
 
 // 컴포넌트가 새로 생성되어도 재생성 되지 않도록 전역적으로 작성
@@ -71,7 +73,15 @@ export default function Image({
     width: ${width && `${width}px`};
     height: ${height && `${height}px`};
     object-fit: ${mode};
-    ${styleProps};
+    ${{ ...styleProps }};
   `;
-  return <img ref={imgRef} src={loaded ? src : placeholder} alt={alt} css={style} />;
+  return <img ref={imgRef} css={style} src={loaded ? src : placeholder} alt={alt} />;
 }
+
+// const StyledImage = styled.image<ImageProps>`
+//   display: ${({ block }) => block && 'block'};
+//   width: ${({ width }) =>width && `${width}px`};
+//   height: ${({ block }) =>height && `${height}px`};
+//   object-fit: ${({ block }) =>mode};
+//   ${({ block }) =>styleProps};
+// `;

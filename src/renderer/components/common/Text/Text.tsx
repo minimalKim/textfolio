@@ -1,8 +1,7 @@
 /* eslint-disable no-param-reassign */
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-export type TextProps = {
-  children: React.ReactNode;
+export type TextProps = PropsWithChildren<{
   size?: number | string;
   block?: boolean;
   paragraph?: boolean;
@@ -12,7 +11,7 @@ export type TextProps = {
   mark?: boolean;
   code?: boolean;
   color?: string;
-};
+}>;
 
 export default function Text({
   children,

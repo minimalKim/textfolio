@@ -6,17 +6,16 @@ import styled from '@emotion/styled';
 
 import ImageComponent from '../Image/Image';
 
-export type AvatarProps = {
-  src: string;
+export type AvatarProps = AvatarWrapperProps & {
+  src?: string;
   alt: string;
-  size?: number;
   threshold: number;
-  shape: 'circle' | 'round' | 'square';
 };
 
 type AvatarWrapperProps = {
   size?: number;
   shape: 'circle' | 'round' | 'square';
+  style?: React.CSSProperties;
 };
 
 const ShapeToCssValue = {
@@ -25,7 +24,14 @@ const ShapeToCssValue = {
   square: 0,
 };
 
-export default function Avatar({ threshold = 0.4, src, alt, size = 140, shape = 'circle' }: AvatarProps) {
+export default function Avatar({
+  threshold = 0.4,
+  src = `https://picsum.photos/150`,
+  alt,
+  size = 140,
+  shape = 'circle',
+  style,
+}: AvatarProps) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -35,7 +41,7 @@ export default function Avatar({ threshold = 0.4, src, alt, size = 140, shape = 
   }, [src]);
 
   return (
-    <AvatarWrapper size={size} shape={shape}>
+    <AvatarWrapper size={size} shape={shape} style={style}>
       <ImageComponent
         src={src}
         alt={alt}
@@ -58,6 +64,7 @@ const AvatarWrapper = styled.div<AvatarWrapperProps>`
   height: ${({ size }) => (size ? `${size - 2}px` : undefined)};
   width: ${({ size }) => (size ? `${size - 2}px` : undefined)};
   background-color: #eee;
+  ${({ style }) => ({ ...style })}
 
   > img {
     transition: opacity 0.2s ease-out;
