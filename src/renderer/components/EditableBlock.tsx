@@ -5,9 +5,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import ContentEditable from 'react-contenteditable';
 
-// eslint-disable-next-line import/no-cycle
-import { Block } from './Editor';
 import SelectMenu from './SelectMenu';
+
+export type Block = {
+  id: string;
+  html: string;
+  tag: string;
+  isFocus: boolean;
+};
 
 export type EditableBlockProps = {
   id: string;
