@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { css } from '@emotion/react';
-import styled from '@emotion/styled';
 import ContentEditable from 'react-contenteditable';
 
 // eslint-disable-next-line import/no-cycle
