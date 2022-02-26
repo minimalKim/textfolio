@@ -20,17 +20,22 @@ export default function DocumentList() {
   return (
     <ul>
       {documents &&
-        Object.keys(documents).map((docId) => (
-          <DocumentListItem key={docId} onClick={() => navigate(`${docId}`)}>
-            {documents[docId][0]?.html || '제목이 없습니다.'}
-          </DocumentListItem>
-        ))}
+        documents.map(({ docId, blocks }) => {
+          const hasTitle = blocks[0].html.length !== 0;
+          return (
+            <DocumentListItem key={docId} hasTitle={hasTitle} onClick={() => navigate(`${docId}`)}>
+              {hasTitle ? blocks[0].html : '제목 없음'}
+            </DocumentListItem>
+          );
+        })}
     </ul>
   );
 }
 
-const DocumentListItem = styled.li`
-  padding: ${({ theme }) => theme.space[3]};
+const DocumentListItem = styled.li<{ hasTitle: boolean }>`
+  padding: ${({ theme }) => theme.space['3.5']};
+  transition: all 0.1s ease-out;
+  color: ${({ theme, hasTitle }) => (hasTitle ? theme.color.gray[800] : theme.color.gray[400])};
   &:hover {
     background: ${({ theme }) => theme.color.gray[50]};
   }

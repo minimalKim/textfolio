@@ -2,18 +2,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { Block } from '../../components/EditableBlock';
+// eslint-disable-next-line import/no-cycle
 import { createUserDoc, getUserDocs, updateUserDoc } from './actions';
 
-export type DocsType = { [key in string]: Block[] };
+export type DocsType = {
+  docId: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+  blocks: Block[];
+};
 
 type DocsState = {
-  documents: DocsType;
+  documents: DocsType[];
   getDocs: {
     error: string | null;
     isLoading: boolean;
   };
   createDoc: {
-    newDocId: string;
+    newDocId: string | null;
     error: string | null;
     isLoading: boolean;
   };
@@ -24,22 +31,28 @@ type DocsState = {
 };
 
 const initialState: DocsState = {
-  documents: {
-    docsWithId: [
-      {
-        html: '',
-        id: '',
-        tag: '',
-        isFocus: false,
-      },
-    ],
-  },
+  documents: [
+    {
+      docId: '',
+      userId: '',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      blocks: [
+        {
+          html: '',
+          id: '',
+          tag: '',
+          isFocus: false,
+        },
+      ],
+    },
+  ],
   getDocs: {
     error: null,
     isLoading: false,
   },
   createDoc: {
-    newDocId: '',
+    newDocId: null,
     error: null,
     isLoading: false,
   },
@@ -59,7 +72,7 @@ const docsSlice = createSlice({
     });
     builder.addCase(getUserDocs.fulfilled, (state, { payload }) => {
       state.getDocs.isLoading = false;
-      state.documents = payload as DocsType;
+      state.documents = payload;
     });
     builder.addCase(getUserDocs.rejected, (state, { error }) => {
       if (error.code) state.getDocs.error = error.code;
@@ -68,8 +81,9 @@ const docsSlice = createSlice({
     builder.addCase(createUserDoc.pending, (state) => {
       state.createDoc.isLoading = true;
     });
-    builder.addCase(createUserDoc.fulfilled, (state, { payload: documentId }) => {
-      state.createDoc.newDocId = documentId;
+    builder.addCase(createUserDoc.fulfilled, (state, { payload }) => {
+      state.documents = payload.newUserDocs;
+      state.createDoc.newDocId = payload.newDocId;
       state.createDoc.isLoading = false;
     });
     builder.addCase(createUserDoc.rejected, (state, { error }) => {
@@ -80,7 +94,12 @@ const docsSlice = createSlice({
       state.updateDoc.isLoading = true;
     });
     builder.addCase(updateUserDoc.fulfilled, (state, { payload }) => {
-      state.documents = { ...state.documents, ...payload };
+      const index = state.documents.map(({ docId }) => docId).indexOf(payload.docId);
+      if (index !== -1) {
+        state.documents[index].blocks = payload.blocks;
+        state.documents[index].updatedAt = payload.updatedAt;
+      }
+      // state.documents = { ...state.documents, ...payload };
       state.updateDoc.isLoading = false;
     });
     builder.addCase(updateUserDoc.rejected, (state, { error }) => {

@@ -1,18 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Block } from '../../components/EditableBlock';
+// eslint-disable-next-line import/no-cycle
 import * as api from './api';
 
-type UpdateUserDocData = { uid: string; userBlocks: { [key in string]: Block[] } };
+type UpdateUserDocData = {
+  docId: string;
+  blocks: Block[];
+};
 
 export const getUserDocs = createAsyncThunk(`docs/init`, async (uid: string) => {
-  const docs = await api.getUserDocs(uid);
-  return docs;
+  const userDocs = await api.getUserDocs(uid);
+  return userDocs;
 });
 
-export const updateUserDoc = createAsyncThunk(`docs/update`, ({ uid, userBlocks }: UpdateUserDocData) => {
-  api.updateUserDoc({ uid, userBlocks });
-  return userBlocks;
+export const updateUserDoc = createAsyncThunk(`docs/update`, async ({ docId, blocks }: UpdateUserDocData) => {
+  const updatedAt = await api.updateUserDoc({ docId, blocks });
+
+  return { docId, updatedAt, blocks };
 });
 
 export const createUserDoc = createAsyncThunk(`docs/create`, async (uid: string) => {

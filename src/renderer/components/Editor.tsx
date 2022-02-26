@@ -23,23 +23,22 @@ export default function Editor({ docId }: EditorProps) {
   const user = useAppSelector(({ auth }) => auth.user);
   const dispatch = useDispatch();
   const document = useAppSelector(({ docs }) => {
-    if (docId) return docs.documents[docId];
+    if (docId) return docs.documents.find(({ docId: documentId }) => documentId === docId);
   });
 
   useEffect(() => {
-    if (!document?.length) {
+    if (!document?.blocks.length) {
       setBlocks([initialBlock]);
       return;
     }
-
-    setBlocks(document);
+    setBlocks(document.blocks);
   }, [document]);
 
   useDebounce(
     async () => {
       if (blocks.length < 1 && blocks[0]?.html === '') return;
       if (user?.uid && docId) {
-        dispatch(updateUserDoc({ uid: user.uid, userBlocks: { [docId]: blocks } }));
+        dispatch(updateUserDoc({ docId, blocks }));
       }
     },
     300,
