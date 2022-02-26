@@ -2,11 +2,11 @@
 import React from 'react';
 
 import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
 import { PlusIcon } from '@heroicons/react/solid';
 
 import { createUserDoc } from '../features/docs/actions';
 import { useAppDispatch, useAppSelector } from '../store';
+import Button from './common/Button/Button';
 import Text from './common/Text/Text';
 
 export default function AddDocButton() {
@@ -20,16 +20,11 @@ export default function AddDocButton() {
   };
 
   return (
-    <AddDocButtonContainer onClick={addDocHandler}>
+    <Button theme='secondary' size='lg' onClick={addDocHandler} style={{ margin: theme.space[3] }}>
       <PlusIcon height={16} />
-      <Text style={{ marginLeft: theme.space['1.5'] }}>new Folio</Text>
-    </AddDocButtonContainer>
+      <Text style={{ marginLeft: theme.space[3] }} color={theme.color.gray[500]} size='sm'>
+        new Folio
+      </Text>
+    </Button>
   );
 }
-
-const AddDocButtonContainer = styled.button`
-  width: 100%;
-  padding: ${({ theme }) => theme.space[3]};
-  display: flex;
-  justify-content: center;
-`;
