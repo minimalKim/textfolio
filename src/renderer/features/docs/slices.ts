@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { Block } from '../../components/EditableBlock';
 // eslint-disable-next-line import/no-cycle
-import { createUserDoc, getUserDocs, updateUserDoc } from './actions';
+import { createUserDoc, deleteUserDoc, getUserDocs, updateUserDoc } from './actions';
 
 export type DocsType = {
   docId: string;
@@ -25,6 +25,10 @@ type DocsState = {
     isLoading: boolean;
   };
   updateDoc: {
+    error: string | null;
+    isLoading: boolean;
+  };
+  deleteDoc: {
     error: string | null;
     isLoading: boolean;
   };
@@ -60,6 +64,10 @@ const initialState: DocsState = {
     error: null,
     isLoading: false,
   },
+  deleteDoc: {
+    error: null,
+    isLoading: false,
+  },
 };
 
 const docsSlice = createSlice({
@@ -70,9 +78,9 @@ const docsSlice = createSlice({
     builder.addCase(getUserDocs.pending, (state) => {
       state.getDocs.isLoading = true;
     });
-    builder.addCase(getUserDocs.fulfilled, (state, { payload }) => {
+    builder.addCase(getUserDocs.fulfilled, (state, { payload: userDocs }) => {
       state.getDocs.isLoading = false;
-      state.documents = payload;
+      state.documents = userDocs;
     });
     builder.addCase(getUserDocs.rejected, (state, { error }) => {
       if (error.code) state.getDocs.error = error.code;
@@ -87,24 +95,34 @@ const docsSlice = createSlice({
       state.createDoc.isLoading = false;
     });
     builder.addCase(createUserDoc.rejected, (state, { error }) => {
-      if (error.code) state.getDocs.error = error.code;
+      if (error.code) state.createDoc.error = error.code;
       state.createDoc.isLoading = false;
     });
     builder.addCase(updateUserDoc.pending, (state) => {
       state.updateDoc.isLoading = true;
     });
-    builder.addCase(updateUserDoc.fulfilled, (state, { payload }) => {
-      const index = state.documents.map(({ docId }) => docId).indexOf(payload.docId);
+    builder.addCase(updateUserDoc.fulfilled, (state, { payload: updatedDoc }) => {
+      const index = state.documents.map(({ docId }) => docId).indexOf(updatedDoc.docId);
       if (index !== -1) {
-        state.documents[index].blocks = payload.blocks;
-        state.documents[index].updatedAt = payload.updatedAt;
+        state.documents[index].blocks = updatedDoc.blocks;
+        state.documents[index].updatedAt = updatedDoc.updatedAt;
       }
-      // state.documents = { ...state.documents, ...payload };
       state.updateDoc.isLoading = false;
     });
     builder.addCase(updateUserDoc.rejected, (state, { error }) => {
-      if (error.code) state.getDocs.error = error.code;
+      if (error.code) state.updateDoc.error = error.code;
       state.updateDoc.isLoading = false;
+    });
+    builder.addCase(deleteUserDoc.pending, (state) => {
+      state.deleteDoc.isLoading = true;
+    });
+    builder.addCase(deleteUserDoc.fulfilled, (state, { payload: deletedDocId }) => {
+      state.documents = state.documents.filter((document) => document.docId !== deletedDocId);
+      state.deleteDoc.isLoading = false;
+    });
+    builder.addCase(deleteUserDoc.rejected, (state, { error }) => {
+      if (error.code) state.deleteDoc.error = error.code;
+      state.deleteDoc.isLoading = false;
     });
   },
 });

@@ -1,5 +1,15 @@
 /* eslint-disable import/no-cycle */
-import { collection, doc, getDocs, query, setDoc, Timestamp, updateDoc, where } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  Timestamp,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
 
 import { Block } from '../../components/EditableBlock';
 import { db } from '../../db/firestore';
@@ -40,7 +50,7 @@ export const updateUserDoc = ({ docId, blocks }: UpdateUserDocsApiData) => {
 };
 
 export const createUserDoc = async (uid: string) => {
-  const newDocId = `doc-${makeId()}`;
+  const newDocId = `doc${makeId()}`;
   const initialBlocks = [{ id: makeId(), html: '', tag: 'h2', isFocus: true }];
   const createdDate = new Date();
   const timeStamp = Timestamp.fromDate(createdDate);
@@ -54,4 +64,10 @@ export const createUserDoc = async (uid: string) => {
 
   const newUserDocs = await getUserDocs(uid);
   return { newDocId, newUserDocs };
+};
+
+export const deleteUserDoc = (docId: string) => {
+  const docRef = doc(db, 'docs', docId);
+  deleteDoc(docRef);
+  return docId;
 };

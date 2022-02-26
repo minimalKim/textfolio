@@ -24,3 +24,8 @@ export const createUserDoc = createAsyncThunk(`docs/create`, async (uid: string)
   const newDocId = await api.createUserDoc(uid);
   return newDocId;
 });
+
+export const deleteUserDoc = createAsyncThunk(`docs/delete`, (deletedDocId: string) => {
+  api.deleteUserDoc(deletedDocId);
+  return deletedDocId;
+});

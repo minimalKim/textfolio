@@ -16,10 +16,6 @@ export default function AddDocButton() {
   const theme = useTheme();
 
   const addDocHandler = async () => {
-    // createDocs
-    // id 받아오기
-    // navigate하기
-    // const newDocId = user?.uid && (await createUserDoc(user.uid));
     user?.uid && dispatch(createUserDoc(user?.uid));
   };
 
