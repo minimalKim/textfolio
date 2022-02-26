@@ -65,19 +65,9 @@ export default function Editor({ docId }: EditorProps) {
 
     setBlocks((prevBlocks) => {
       const updatedBlocks = [...prevBlocks];
-      // updatedBlocks[currentBlockIndex].isFocus = false;
       updatedBlocks.splice(currentBlockIndex + 1, 0, newBlock);
       return updatedBlocks;
     });
-  };
-
-  const onBlurHandler = (currentBlockId: string) => {
-    // const currentBlockIndex = blocks.map((block) => block.id).indexOf(currentBlockId);
-    // setBlocks((prevBlocks) => {
-    //   const updatedBlocks = [...prevBlocks];
-    //   updatedBlocks[currentBlockIndex].isFocus = false;
-    //   return updatedBlocks;
-    // });
   };
 
   const deleteBlockHandler = (currentBlockId: string) => {
@@ -88,7 +78,6 @@ export default function Editor({ docId }: EditorProps) {
     setBlocks((prevBlocks) => {
       const updatedBlocks = [...prevBlocks];
       updatedBlocks.splice(currentBlockIndex, 1);
-      // updatedBlocks[currentBlockIndex - 1].isFocus = true;
       return updatedBlocks;
     });
 
@@ -107,7 +96,6 @@ export default function Editor({ docId }: EditorProps) {
           updateBlock={updateEditorHandler}
           addBlock={addBlockEditorHandler}
           deleteBlock={deleteBlockHandler}
-          onBlur={onBlurHandler}
         />
       ))}
     </EditorWrapper>

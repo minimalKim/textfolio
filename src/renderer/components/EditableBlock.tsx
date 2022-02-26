@@ -22,19 +22,9 @@ export type EditableBlockProps = {
   updateBlock: (block: Block) => void;
   addBlock: (currentBlockId: string) => void;
   deleteBlock: (currentBlockId: string) => boolean;
-  onBlur: (currentBlockId: string) => void;
 };
 
-function EditableBlock({
-  id,
-  html,
-  tag,
-  isFocus,
-  updateBlock,
-  addBlock,
-  deleteBlock,
-  onBlur,
-}: EditableBlockProps) {
+function EditableBlock({ id, html, tag, isFocus, updateBlock, addBlock, deleteBlock }: EditableBlockProps) {
   const [block, setBlock] = useState({ id, html, tag, isFocus });
   const [keyInfos, setKeyInfos] = useState<{ htmlBackup: null | string; previousKey: null | string }>({
     htmlBackup: '',
@@ -125,9 +115,6 @@ function EditableBlock({
         onChange={changeHandler}
         onKeyDown={onKeyDownHandler}
         onKeyUp={onKeyUpHandler}
-        onBlur={() => {
-          onBlur(id);
-        }}
         css={style}
       />
     </>
@@ -161,16 +148,15 @@ function getCaretCoordinates() {
 const style = css`
   padding: 0.6rem;
   margin: 0.2rem;
-  background-color: #f7fafc;
+  background-color: #f7fafc8f;
   border-radius: 0.2rem;
   transition: all 0.2s ease-in-out;
-
+  outline: none;
   &:hover {
-    background-color: #edf2f7;
+    background-color: #edf2f765;
   }
-
   &:focus {
-    background-color: #edf2f7;
+    background-color: #edf2f7ab;
   }
 `;
 
