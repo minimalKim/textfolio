@@ -2,13 +2,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { Block } from '../../components/EditableBlock';
-import { getUserDocs } from './actions';
+import { createUserDoc, getUserDocs, updateUserDoc } from './actions';
 
-type DocsType = { [key in string]: Block[] };
+export type DocsType = { [key in string]: Block[] };
 
 type DocsState = {
   documents: DocsType;
   getDocs: {
+    error: string | null;
+    isLoading: boolean;
+  };
+  createDoc: {
+    newDocId: string;
+    error: string | null;
+    isLoading: boolean;
+  };
+  updateDoc: {
     error: string | null;
     isLoading: boolean;
   };
@@ -25,8 +34,16 @@ const initialState: DocsState = {
       },
     ],
   },
-
   getDocs: {
+    error: null,
+    isLoading: false,
+  },
+  createDoc: {
+    newDocId: '',
+    error: null,
+    isLoading: false,
+  },
+  updateDoc: {
     error: null,
     isLoading: false,
   },
@@ -47,6 +64,28 @@ const docsSlice = createSlice({
     builder.addCase(getUserDocs.rejected, (state, { error }) => {
       if (error.code) state.getDocs.error = error.code;
       state.getDocs.isLoading = false;
+    });
+    builder.addCase(createUserDoc.pending, (state) => {
+      state.createDoc.isLoading = true;
+    });
+    builder.addCase(createUserDoc.fulfilled, (state, { payload: documentId }) => {
+      state.createDoc.newDocId = documentId;
+      state.createDoc.isLoading = false;
+    });
+    builder.addCase(createUserDoc.rejected, (state, { error }) => {
+      if (error.code) state.getDocs.error = error.code;
+      state.createDoc.isLoading = false;
+    });
+    builder.addCase(updateUserDoc.pending, (state) => {
+      state.updateDoc.isLoading = true;
+    });
+    builder.addCase(updateUserDoc.fulfilled, (state, { payload }) => {
+      state.documents = { ...state.documents, ...payload };
+      state.updateDoc.isLoading = false;
+    });
+    builder.addCase(updateUserDoc.rejected, (state, { error }) => {
+      if (error.code) state.getDocs.error = error.code;
+      state.updateDoc.isLoading = false;
     });
   },
 });

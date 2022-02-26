@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, StyleHTMLAttributes } from 'react';
 
 export type TextProps = PropsWithChildren<{
   size?: number | string;
@@ -11,6 +11,7 @@ export type TextProps = PropsWithChildren<{
   mark?: boolean;
   code?: boolean;
   color?: string;
+  style?: React.CSSProperties;
 }>;
 
 export default function Text({
@@ -24,6 +25,7 @@ export default function Text({
   mark,
   code,
   color = '#171923',
+  style,
 }: TextProps) {
   // eslint-disable-next-line no-nested-ternary
   const Tag = block ? 'div' : paragraph ? 'p' : 'span';
@@ -70,5 +72,5 @@ export default function Text({
   }
 
   // eslint-disable-next-line consistent-return
-  return <Tag style={{ ...fontStyle }}>{children}</Tag>;
+  return <Tag style={{ ...fontStyle, ...style }}>{children}</Tag>;
 }

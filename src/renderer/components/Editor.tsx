@@ -1,21 +1,18 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable import/order */
 /* eslint-disable consistent-return */
-import styled from '@emotion/styled/types/base';
-import { doc, setDoc, updateDoc } from 'firebase/firestore';
-import React, { useEffect, useRef, useState } from 'react';
-import { db } from '../db/firestore';
+import styled from '@emotion/styled';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateUserDoc } from '../features/docs/actions';
 
 import useDebounce from '../hooks/useDebounce';
 import { useAppSelector } from '../store';
+import { makeId } from '../utils';
 
 import EditableBlock, { Block } from './EditableBlock';
 
-const uid = () => {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2);
-};
-
-const initialBlock: Block = { id: uid(), html: '', tag: 'p', isFocus: true };
+const initialBlock: Block = { id: makeId(), html: '', tag: 'h2', isFocus: true };
 
 type EditorProps = {
   docId?: string;
@@ -24,23 +21,25 @@ type EditorProps = {
 export default function Editor({ docId }: EditorProps) {
   const [blocks, setBlocks] = useState([initialBlock]);
   const user = useAppSelector(({ auth }) => auth.user);
-  const docIdRef = useRef('');
-  const document = useAppSelector(({ docs }) => docId && docs.documents[docId]);
+  const dispatch = useDispatch();
+  const document = useAppSelector(({ docs }) => {
+    if (docId) return docs.documents[docId];
+  });
 
   useEffect(() => {
-    if (docId && document) {
-      docIdRef.current = docId;
-      setBlocks(document);
+    if (!document?.length) {
+      setBlocks([initialBlock]);
+      return;
     }
-  }, [docId]);
+
+    setBlocks(document);
+  }, [document]);
 
   useDebounce(
     async () => {
-      if (blocks.length === 1 && blocks[0].html === '') return;
-      if (user?.uid && docIdRef.current) {
-        const docRef = doc(db, 'docs', user?.uid);
-        await updateDoc(docRef, { [docIdRef.current]: blocks });
-        // await setDoc(docRef, { [`docs-${uid()}`]: blocks });
+      if (blocks.length < 1 && blocks[0]?.html === '') return;
+      if (user?.uid && docId) {
+        dispatch(updateUserDoc({ uid: user.uid, userBlocks: { [docId]: blocks } }));
       }
     },
     300,
@@ -62,12 +61,12 @@ export default function Editor({ docId }: EditorProps) {
   };
 
   const addBlockEditorHandler = (currentBlockId: string) => {
-    const newBlock = { id: uid(), html: '', tag: 'p', isFocus: true };
+    const newBlock = { id: makeId(), html: '', tag: 'p', isFocus: true };
     const currentBlockIndex = blocks.map((block) => block.id).indexOf(currentBlockId);
 
     setBlocks((prevBlocks) => {
       const updatedBlocks = [...prevBlocks];
-      updatedBlocks[currentBlockIndex].isFocus = false;
+      // updatedBlocks[currentBlockIndex].isFocus = false;
       updatedBlocks.splice(currentBlockIndex + 1, 0, newBlock);
       return updatedBlocks;
     });
@@ -90,7 +89,7 @@ export default function Editor({ docId }: EditorProps) {
     setBlocks((prevBlocks) => {
       const updatedBlocks = [...prevBlocks];
       updatedBlocks.splice(currentBlockIndex, 1);
-      updatedBlocks[currentBlockIndex - 1].isFocus = true;
+      // updatedBlocks[currentBlockIndex - 1].isFocus = true;
       return updatedBlocks;
     });
 
@@ -98,7 +97,7 @@ export default function Editor({ docId }: EditorProps) {
   };
 
   return (
-    <div>
+    <EditorWrapper>
       {blocks.map(({ id, html, tag, isFocus }) => (
         <EditableBlock
           key={id}
@@ -112,6 +111,14 @@ export default function Editor({ docId }: EditorProps) {
           onBlur={onBlurHandler}
         />
       ))}
-    </div>
+    </EditorWrapper>
   );
 }
+
+const EditorWrapper = styled.div`
+  height: 100%;
+  background-color: white;
+  margin: ${({ theme }) => `${theme.space[4]} ${theme.space[8]}`};
+  padding: ${({ theme }) => theme.space[8]};
+  border-radius: ${({ theme }) => theme.radius.lg};
+`;

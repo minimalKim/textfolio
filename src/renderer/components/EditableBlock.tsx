@@ -121,6 +121,7 @@ function EditableBlock({
         innerRef={ref}
         tagName={block.tag}
         html={block.html}
+        placeholder='제목을 입력해 주세요'
         onChange={changeHandler}
         onKeyDown={onKeyDownHandler}
         onKeyUp={onKeyUpHandler}
@@ -134,6 +135,7 @@ function EditableBlock({
 }
 
 function setCaretToEnd(el: HTMLElement) {
+  if (!el) return;
   const range = document.createRange();
   const selection = window.getSelection();
   range.selectNodeContents(el);
@@ -157,7 +159,19 @@ function getCaretCoordinates() {
 }
 
 const style = css`
-  padding: 0.2rem;
+  padding: 0.6rem;
+  margin: 0.2rem;
+  background-color: #f7fafc;
+  border-radius: 0.2rem;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #edf2f7;
+  }
+
+  &:focus {
+    background-color: #edf2f7;
+  }
 `;
 
 export default EditableBlock;

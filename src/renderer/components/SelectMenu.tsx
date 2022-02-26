@@ -95,8 +95,8 @@ export default function SelectMenu({ position, onSelect, onClose }: SelectMenuPr
 
 const SelectMenuWrapper = styled.div<{ position: { x: number | null; y: number | null } }>`
   position: absolute;
-  top: ${({ position }) => position.y}px;
-  left: ${({ position }) => position.x}px;
+  top: ${({ position }) => position.y && position.y - 74}px;
+  left: ${({ position }) => position.x && position.x - 324}px;
   display: flex;
   flex-direction: column;
 `;
