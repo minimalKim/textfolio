@@ -32,7 +32,9 @@ export default function App() {
         <Routes>
           <Route path='/' element={<WelcomePage />} />
           <Route path='/home' element={<AuthRoute component={HomePage} />} />
-          <Route path='/docs' element={<AuthRoute component={DocumentsPage} />} />
+          <Route path='/docs' element={<AuthRoute component={DocumentsPage} />}>
+            <Route path=':docId' element={<AuthRoute component={DocumentsPage} />} />
+          </Route>
           <Route path='/search' element={<AuthRoute component={SearchPage} />} />
           <Route path='/setting' element={<AuthRoute component={SettingPage} />} />
         </Routes>

@@ -100,7 +100,7 @@ const sizes = {
   sm: css`
     height: 1.75rem;
     font-size: 0.75rem;
-    padding: 0 0.875rem;
+    padding: 0 0.5rem;
   `,
   md: css`
     height: 2.5rem;

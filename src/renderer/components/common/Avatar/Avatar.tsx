@@ -36,8 +36,13 @@ export default function Avatar({
 
   useEffect(() => {
     const image = new Image();
+    const handleImgSrcLoad = () => setLoaded(true);
     image.src = src;
-    image.onload = () => setLoaded(true);
+    image.addEventListener('load', handleImgSrcLoad);
+
+    return () => {
+      image.removeEventListener('load', handleImgSrcLoad);
+    };
   }, [src]);
 
   return (
