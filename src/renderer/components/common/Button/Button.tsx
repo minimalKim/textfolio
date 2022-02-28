@@ -3,14 +3,15 @@ import React, { PropsWithChildren } from 'react';
 
 import { css } from '@emotion/react';
 
-type ButtonProps = PropsWithChildren<{
-  theme?: 'primary' | 'secondary' | 'tertiary';
-  size?: 'sm' | 'md' | 'lg';
-  width?: string | number;
-  disabled?: boolean;
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
-  style?: React.CSSProperties;
-}>;
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  PropsWithChildren<{
+    theme?: 'primary' | 'secondary' | 'tertiary';
+    size?: 'sm' | 'md' | 'lg';
+    width?: string | number;
+    disabled?: boolean;
+    onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+    style?: React.CSSProperties;
+  }>;
 
 function Button({
   children,

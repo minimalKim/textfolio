@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
+import Button from '../components/common/Button/Button';
 import Card from '../components/common/Card/Card';
 import { SignInForm } from '../components/SignInForm';
 import { SignUpForm } from '../components/SignUpForm';
@@ -24,13 +25,13 @@ export default function WelcomePage() {
     <WelcomePageWrapper>
       <LeftSection>image</LeftSection>
       <RightSection>
-        <Card>
+        <Card padding={10} style={{ width: '550px' }}>
           {isSignInPage ? <SignInForm /> : <SignUpForm />}
-          <span>{optionInText[0]}</span>
-          <button type='button' onClick={() => setIsSignInPage(!isSignInPage)}>
-            {optionInText[1]}
-          </button>
         </Card>
+        <span>{optionInText[0]}</span>
+        <Button type='button' theme='secondary' onClick={() => setIsSignInPage(!isSignInPage)}>
+          {optionInText[1]}
+        </Button>
       </RightSection>
     </WelcomePageWrapper>
   );

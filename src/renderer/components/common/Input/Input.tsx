@@ -6,23 +6,13 @@ import styled from '@emotion/styled';
 type InputSize = 'sm' | 'md' | 'lg';
 type InputVariant = 'outline' | 'filled';
 
-export type InputProps = {
-  type?: React.HTMLInputTypeAttribute;
+export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> & {
   size?: InputSize;
   variant?: InputVariant;
-  placeholder?: string;
   isError?: boolean;
-  style?: React.CSSProperties;
 };
 
-export default function Input({
-  type = 'text',
-  size = 'md',
-  variant = 'outline',
-  placeholder,
-  isError = false,
-  style,
-}: InputProps) {
+export default function Input({ size = 'md', variant = 'outline', isError = false, ...rest }: InputProps) {
   const theme = useTheme();
 
   const sizes: Record<InputSize, SerializedStyles> = {
@@ -51,13 +41,11 @@ export default function Input({
       }
     `,
     filled: css`
-      background-color: ${theme.color.gray[50]};
-      border-color: ${theme.color.gray[50]};
-
+      background-color: ${theme.color.gray[100]};
+      border-color: ${theme.color.gray[100]};
       &:hover {
-        background-color: ${theme.color.gray[100]};
+        background-color: ${theme.color.gray[200]};
       }
-
       &:focus {
         background-color: white;
       }
@@ -67,17 +55,11 @@ export default function Input({
   const error =
     isError &&
     css`
-      border: 2px solid ${theme.color.danger};
+      border: 1px solid ${theme.color.danger};
+      outline: 1px solid ${theme.color.danger};
     `;
 
-  return (
-    <DefaultInput
-      type={type}
-      placeholder={placeholder}
-      css={[sizes[size], variants[variant], error]}
-      style={style}
-    />
-  );
+  return <DefaultInput css={[sizes[size], variants[variant], error]} {...rest} />;
 }
 
 const DefaultInput = styled.input`
