@@ -28,8 +28,6 @@ export default function Card({
     padding: ${theme.space[padding]};
     background-color: ${bgColor || theme.color.gray[50]};
     max-width: ${theme.size[maxW]};
-    display: flex;
-    justify-content: center;
     ${{ ...styleProps }}
   `;
 

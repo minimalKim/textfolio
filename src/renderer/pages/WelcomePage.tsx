@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
+import Card from '../components/common/Card/Card';
 import { SignInForm } from '../components/SignInForm';
 import { SignUpForm } from '../components/SignUpForm';
 import { useAppSelector } from '../store';
@@ -19,14 +21,38 @@ export default function WelcomePage() {
   }, [user]);
 
   return (
-    <div>
-      {isSignInPage ? <SignInForm /> : <SignUpForm />}
-      <div>
-        <span>{optionInText[0]}</span>
-        <button type='button' onClick={() => setIsSignInPage(!isSignInPage)}>
-          {optionInText[1]}
-        </button>
-      </div>
-    </div>
+    <WelcomePageWrapper>
+      <LeftSection>image</LeftSection>
+      <RightSection>
+        <Card>
+          {isSignInPage ? <SignInForm /> : <SignUpForm />}
+          <span>{optionInText[0]}</span>
+          <button type='button' onClick={() => setIsSignInPage(!isSignInPage)}>
+            {optionInText[1]}
+          </button>
+        </Card>
+      </RightSection>
+    </WelcomePageWrapper>
   );
 }
+
+const WelcomePageWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+`;
+
+const LeftSection = styled.div`
+  background-color: orange;
+  width: 420px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const RightSection = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+`;
