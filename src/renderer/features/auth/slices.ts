@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 // eslint-disable-next-line import/no-cycle
-import { signInUser, signOutUser } from './actions';
+import { signInUser, signOutUser, signUpUser } from './actions';
 
 type User = {
   uid: string;
@@ -19,12 +19,17 @@ type SignState = {
 type AuthState = {
   user: User | null;
   signIn: SignState;
+  signUp: SignState;
   signOut: SignState;
 };
 
 const initialState: AuthState = {
   user: null,
   signIn: {
+    error: null,
+    isLoading: false,
+  },
+  signUp: {
     error: null,
     isLoading: false,
   },
@@ -52,6 +57,16 @@ const authSlice = createSlice({
     builder.addCase(signInUser.rejected, (state, { error }) => {
       if (error.code) state.signIn.error = error.code;
       state.signIn.isLoading = false;
+    });
+    builder.addCase(signUpUser.pending, (state) => {
+      state.signUp.isLoading = true;
+    });
+    builder.addCase(signUpUser.fulfilled, (state) => {
+      state.signUp.isLoading = false;
+    });
+    builder.addCase(signUpUser.rejected, (state, { error }) => {
+      if (error.code) state.signIn.error = error.code;
+      state.signUp.isLoading = false;
     });
     builder.addCase(signOutUser.pending, (state) => {
       state.signOut.isLoading = true;
