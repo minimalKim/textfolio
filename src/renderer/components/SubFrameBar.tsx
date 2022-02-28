@@ -3,6 +3,8 @@ import React from 'react';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import { signOutUser } from '../features/auth/actions';
+import { useAppDispatch } from '../store';
 import Avatar from './common/Avatar/Avatar';
 import Button from './common/Button/Button';
 import Image from './common/Image/Image';
@@ -13,7 +15,10 @@ type SubFrameBarProps = {
 };
 
 export default function SubFrameBar({ canGoBack = false }: SubFrameBarProps) {
+  const dispatch = useAppDispatch();
   const theme = useTheme();
+
+  const onClickSignOutBtnHandler = () => dispatch(signOutUser());
 
   return (
     <SubFrameBarWrapper>
@@ -34,7 +39,11 @@ export default function SubFrameBar({ canGoBack = false }: SubFrameBarProps) {
           <Text strong size='lg'>
             Hi, user
           </Text>
-          <Button theme='secondary' style={{ marginLeft: theme.space[12] }}>
+          <Button
+            theme='secondary'
+            style={{ marginLeft: theme.space[12] }}
+            onClick={onClickSignOutBtnHandler}
+          >
             Sign Out
           </Button>
         </SubFrameBarInnerRight>
