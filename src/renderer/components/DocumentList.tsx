@@ -49,7 +49,7 @@ export default function DocumentList() {
               </TextWrapper>
               <DeleteButton
                 size='sm'
-                theme='secondary'
+                colorTheme='secondary'
                 onClick={createDeleteDocHandler(docId)}
                 style={{ marginRight: theme.space['3.5'] }}
               >

@@ -26,7 +26,7 @@ export default function SubFrameBar({ canGoBack = false }: SubFrameBarProps) {
         <SubFrameBarInnerLeft>
           Logo
           <Image src='' alt='' style={undefined} />
-          {canGoBack && <Button theme='secondary'>Back</Button>}
+          {canGoBack && <Button colorTheme='secondary'>Back</Button>}
         </SubFrameBarInnerLeft>
         <SubFrameBarInnerRight>
           <Avatar
@@ -40,7 +40,7 @@ export default function SubFrameBar({ canGoBack = false }: SubFrameBarProps) {
             Hi, user
           </Text>
           <Button
-            theme='secondary'
+            colorTheme='secondary'
             style={{ marginLeft: theme.space[12] }}
             onClick={onClickSignOutBtnHandler}
           >

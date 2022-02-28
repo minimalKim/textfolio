@@ -20,7 +20,7 @@ export default function AddDocButton() {
   };
 
   return (
-    <Button theme='secondary' size='lg' onClick={addDocHandler} style={{ margin: theme.space[3] }}>
+    <Button colorTheme='secondary' size='lg' onClick={addDocHandler} style={{ margin: theme.space[3] }}>
       <PlusIcon height={16} />
       <Text style={{ marginLeft: theme.space[3] }} color={theme.color.gray[500]} size='sm'>
         new Folio

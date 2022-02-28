@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { ThemeProvider } from '@emotion/react';
+import { ThemeProvider, useTheme } from '@emotion/react';
 
-import theme from '../../../styles/theme';
 import Card, { CardProps } from './Card';
 
 export default {
@@ -11,6 +10,8 @@ export default {
 };
 
 export function Default(args: CardProps) {
+  const theme = useTheme();
+
   return (
     <ThemeProvider theme={theme}>
       <Card {...args} style={{ height: '180px' }}>

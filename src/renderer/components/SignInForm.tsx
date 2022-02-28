@@ -24,53 +24,51 @@ export function SignInForm() {
   const SignInResponseError = useAppSelector(({ auth }) => auth.signIn.error);
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
-        <Container>
-          <Label htmlFor='email'>
-            Email
-            <Input
-              type='email'
-              id='email'
-              name='email'
-              variant='filled'
-              value={values.email}
-              isError={!!errors?.email}
-              onChange={handleChange}
-            />
-          </Label>
-          <Text block color='danger' size='xs'>
-            {errors?.email}
-          </Text>
-        </Container>
-
-        <Container>
-          <Label htmlFor='password'>
-            Password
-            <Input
-              type='password'
-              id='password'
-              name='password'
-              variant='filled'
-              value={values.password}
-              isError={!!errors?.password}
-              onChange={handleChange}
-            />
-          </Label>
-          <Text block color='danger' size='xs'>
-            {errors?.password}
-          </Text>
-        </Container>
-
-        <Button type='submit' width='100%'>
-          Sign in
-        </Button>
-        {isLoading ? 'loading...' : ''}
+    <Form onSubmit={handleSubmit}>
+      <Container>
+        <Label htmlFor='email'>
+          Email
+          <Input
+            type='email'
+            id='email'
+            name='email'
+            variant='filled'
+            value={values.email}
+            isError={!!errors?.email}
+            onChange={handleChange}
+          />
+        </Label>
         <Text block color='danger' size='xs'>
-          {SignInResponseError}
+          {errors?.email}
         </Text>
-      </Form>
-    </div>
+      </Container>
+
+      <Container>
+        <Label htmlFor='password'>
+          Password
+          <Input
+            type='password'
+            id='password'
+            name='password'
+            variant='filled'
+            value={values.password}
+            isError={!!errors?.password}
+            onChange={handleChange}
+          />
+        </Label>
+        <Text block color='danger' size='xs'>
+          {errors?.password}
+        </Text>
+      </Container>
+
+      <Button type='submit' style={{ width: '100%' }}>
+        Sign in
+      </Button>
+      {isLoading ? 'loading...' : ''}
+      <Text block color='danger' size='xs'>
+        {SignInResponseError}
+      </Text>
+    </Form>
   );
 }
 
