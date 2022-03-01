@@ -47,6 +47,6 @@ module.exports = {
       '@': path.resolve(__dirname, 'src/renderer'),
     },
   },
-  plugins: [new ForkTsCheckerWebpackPlugin(), new Dotenv()],
+  plugins: [new ForkTsCheckerWebpackPlugin(), new Dotenv({ path: './.env', systemvars: true })],
   devtool: 'inline-source-map',
 };
