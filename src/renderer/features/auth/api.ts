@@ -3,6 +3,7 @@ import {
   NextOrObserver,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut as signOutFirebase,
   User,
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
@@ -26,6 +27,11 @@ type UserProfileApiData = {
   avatar: string;
 };
 
+const createUserProfile = (userProfile: UserProfileApiData) => {
+  const docRef = doc(db, 'profiles', userProfile.uid);
+  return setDoc(docRef, userProfile);
+};
+
 export const signIn = async ({ email, password }: SignInApiData) => {
   const { user } = await signInWithEmailAndPassword(auth, email, password);
   return user.uid;
@@ -35,14 +41,13 @@ export const signUp = async ({ email, password, username, avatar }: SignUpApiDat
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   const userProfile = { uid: user.uid, email, username, avatar };
   createUserProfile(userProfile);
-  return user;
 };
 
-const createUserProfile = async (userProfile: UserProfileApiData) => {
-  await setDoc(doc(db, 'profiles', userProfile.uid), userProfile);
-};
+export const signOut = () => signOutFirebase(auth);
 
-export const getUserProfile = (uid: string) =>
-  getDoc(doc(db, 'profiles', uid)).then((snapshot) => snapshot.data());
+export const getUserProfile = (uid: string) => {
+  const docRef = doc(db, 'profiles', uid);
+  return getDoc(docRef).then((snapshot) => snapshot.data());
+};
 
 export const onAuthStateChanges = (onAuth: NextOrObserver<User>) => onAuthStateChanged(auth, onAuth);

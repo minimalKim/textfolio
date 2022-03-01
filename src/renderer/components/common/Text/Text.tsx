@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
-import React, { PropsWithChildren, StyleHTMLAttributes } from 'react';
+import React, { PropsWithChildren } from 'react';
+
+import { useTheme } from '@emotion/react';
 
 export type TextProps = PropsWithChildren<{
   size?: number | string;
@@ -29,9 +31,13 @@ export default function Text({
 }: TextProps) {
   // eslint-disable-next-line no-nested-ternary
   const Tag = block ? 'div' : paragraph ? 'p' : 'span';
+  const theme = useTheme();
 
   // eslint-disable-next-line default-case
   switch (size) {
+    case 'xs':
+      size = '0.75rem';
+      break;
     case 'sm':
       size = '0.875rem';
       break;
@@ -56,7 +62,7 @@ export default function Text({
     fontWeight: strong ? 'bold' : undefined,
     fontSize: size,
     textDecoration: underline ? 'underline' : undefined,
-    color,
+    color: color === 'danger' ? theme.color.danger : undefined,
   };
 
   if (del) {

@@ -1,5 +1,21 @@
 import '@emotion/react';
 
+export type FontSize = {
+  xs: '0.75rem';
+  sm: '0.875rem';
+  md: '1rem';
+  lg: '1.125rem';
+  xl: '1.25rem';
+  '2xl': '1.5rem';
+  '3xl': '1.875rem';
+  '4xl': '2.25rem';
+  '5xl': '3rem';
+  '6xl': '3.75rem';
+  '7xl': '4.5rem';
+  '8xl': '6rem';
+  '9xl': '8rem';
+};
+
 export type Radius = {
   none: string;
   sm: string;
@@ -76,6 +92,7 @@ export type Size = {
 
 declare module '@emotion/react' {
   export interface Theme {
+    fontSize: FontSize;
     color: {
       gray: {
         50: string;
@@ -90,12 +107,18 @@ declare module '@emotion/react' {
         900: string;
       };
       primary: {
+        50: string;
+        100: string;
+        200: string;
         300: string;
         400: string;
         500: string;
         600: string;
         700: string;
       };
+      success: string;
+      danger: string;
+      info: string;
     };
     space: Space;
     radius: Radius;

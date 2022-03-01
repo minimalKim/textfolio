@@ -13,8 +13,8 @@ const defaultEmailValidate = <T extends { email: string }>({ email }: T): Partia
   const errors: Partial<T> = {};
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
-  if (!email) errors.email = '이메일을 입력해 주세요';
-  if (!emailRegex.test(email)) errors.email = '유효한 이메일이 아닙니다';
+  if (!email.length) errors.email = '이메일을 입력해 주세요';
+  else if (!emailRegex.test(email)) errors.email = '유효한 이메일이 아닙니다';
 
   return errors;
 };
@@ -24,9 +24,10 @@ const defaultPasswordValidate = <T extends { password: string }>({ password }: T
   const passwordAsteriskRegex = /^(?=.*[!@#$%^*+=-]).{6,16}$/;
   const passwordRegex = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*+=-]).{6,16}$/i;
 
-  if (!passwordAsteriskRegex.test(password))
+  if (!password.length) errors.password = '비밀번호를 입력해 주세요';
+  else if (!passwordAsteriskRegex.test(password))
     errors.password = '비밀번호에 특수문자(!@#$%^*+=-) 중 하나를 포함해주세요';
-  if (!passwordRegex.test(password))
+  else if (!passwordRegex.test(password))
     errors.password = '6 ~ 16자의 영문 + 숫자 + 특수문자(!@#$%^*+=-) 조합의 비밀번호를 입력해 주세요';
 
   return errors;
@@ -38,7 +39,7 @@ const useForm = <T extends { [key: string]: string }>({
   validate,
 }: useFormProps<T>) => {
   const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Partial<T>>();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

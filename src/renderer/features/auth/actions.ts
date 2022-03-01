@@ -12,10 +12,8 @@ type SignUpFormData = SignInFormData & {
   avatar: string;
 };
 
-export const signInUser = createAsyncThunk(`auth/signIn`, (formData: SignInFormData) => {
-  api.signIn(formData);
-});
+export const signInUser = createAsyncThunk(`auth/signIn`, (formData: SignInFormData) => api.signIn(formData));
 
-export const signUpUser = createAsyncThunk(`auth/signUp`, (formData: SignUpFormData) => {
-  api.signUp(formData);
-});
+export const signUpUser = createAsyncThunk(`auth/signUp`, (formData: SignUpFormData) => api.signUp(formData));
+
+export const signOutUser = createAsyncThunk(`auth/signOut`, () => api.signOut());

@@ -1,3 +1,5 @@
+import { FontSize } from './emotion';
+
 export const size = {
   xs: '25em', // 400px
   sm: '31.25em', // 500px
@@ -7,6 +9,21 @@ export const size = {
 };
 
 const theme = {
+  fontSize: {
+    xs: '0.75rem',
+    sm: '0.875rem',
+    md: '1rem',
+    lg: '1.125rem',
+    xl: '1.25rem',
+    '2xl': '1.5rem',
+    '3xl': '1.875rem',
+    '4xl': '2.25rem',
+    '5xl': '3rem',
+    '6xl': '3.75rem',
+    '7xl': '4.5rem',
+    '8xl': '6rem',
+    '9xl': '8rem',
+  } as FontSize,
   color: {
     gray: {
       50: '#F7FAFC',
@@ -21,12 +38,18 @@ const theme = {
       900: '#171923',
     },
     primary: {
+      50: '#FFFAF0',
+      100: '#FEEBCB',
+      200: '#FBD38D',
       300: '#F8987A',
       400: '#F78561',
-      500: '#F78561',
+      500: '#F36031',
       600: '#E6410C',
       700: '#CE3A0B',
     },
+    success: '#28a745',
+    danger: '#dc3545',
+    info: '#3182CE',
   },
   space: {
     px: '1px',

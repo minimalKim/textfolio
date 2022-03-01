@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { css } from '@emotion/core';
+import { ThemeProvider } from '@emotion/react';
 
+import theme from '../../../styles/theme';
 import Button from './Button';
 
 export default {
@@ -12,25 +14,80 @@ export default {
   },
 };
 
-export const button = () => {
-  return <Button>Button</Button>;
-};
+export function Default() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button>Button</Button>
+    </ThemeProvider>
+  );
+}
 
-button.story = {
-  name: 'Default',
-};
+export function PrimaryButton() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button>Primary</Button>
+    </ThemeProvider>
+  );
+}
 
-export const primaryButton = () => {
-  return <Button>Primary</Button>;
-};
+export function SecondaryButton() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button colorTheme='secondary'>SECONDARY</Button>
+    </ThemeProvider>
+  );
+}
 
-export const secondaryButton = () => {
-  return <Button theme='secondary'>SECONDARY</Button>;
-};
+export function TertiaryButton() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button colorTheme='tertiary'>TERTIARY</Button>
+    </ThemeProvider>
+  );
+}
 
-export const tertiaryButton = () => {
-  return <Button theme='tertiary'>TERTIARY</Button>;
-};
+export function Sizes() {
+  return (
+    <ThemeProvider theme={theme}>
+      <div css={buttonWrapper}>
+        <div>
+          <div className='description'>Small</div>
+          <Button size='sm'>BUTTON</Button>
+        </div>
+        <div>
+          <div className='description'>Medium</div>
+          <Button size='md'>BUTTON</Button>
+        </div>
+        <div>
+          <div className='description'>Big</div>
+          <Button size='lg'>BUTTON</Button>
+        </div>
+      </div>
+    </ThemeProvider>
+  );
+}
+
+export function Disabled() {
+  return (
+    <ThemeProvider theme={theme}>
+      <div css={buttonWrapper}>
+        <div>
+          <Button disabled>PRIMARY</Button>
+        </div>
+        <div>
+          <Button disabled colorTheme='secondary'>
+            SECONDARY
+          </Button>
+        </div>
+        <div>
+          <Button disabled colorTheme='tertiary'>
+            TERTIARY
+          </Button>
+        </div>
+      </div>
+    </ThemeProvider>
+  );
+}
 
 const buttonWrapper = css`
   .description {
@@ -40,42 +97,3 @@ const buttonWrapper = css`
     margin-top: 2rem;
   }
 `;
-
-export const sizes = () => {
-  return (
-    <div css={buttonWrapper}>
-      <div>
-        <div className='description'>Small</div>
-        <Button size='sm'>BUTTON</Button>
-      </div>
-      <div>
-        <div className='description'>Medium</div>
-        <Button size='md'>BUTTON</Button>
-      </div>
-      <div>
-        <div className='description'>Big</div>
-        <Button size='lg'>BUTTON</Button>
-      </div>
-    </div>
-  );
-};
-
-export const disabled = () => {
-  return (
-    <div css={buttonWrapper}>
-      <div>
-        <Button disabled>PRIMARY</Button>
-      </div>
-      <div>
-        <Button disabled theme='secondary'>
-          SECONDARY
-        </Button>
-      </div>
-      <div>
-        <Button disabled theme='tertiary'>
-          TERTIARY
-        </Button>
-      </div>
-    </div>
-  );
-};

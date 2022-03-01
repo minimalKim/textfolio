@@ -49,6 +49,7 @@ const style = css`
   body {
     background-color: #f7fafc;
     line-height: 1;
+    font-family: 'Inter', sans-serif;
   }
   ul,
   ol,
@@ -58,6 +59,21 @@ const style = css`
   em,
   address {
     font-style: normal;
+  }
+  input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-style: solid;
+    &::-ms-clear {
+      display: none;
+    }
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
   img {
     border: 0 none;
