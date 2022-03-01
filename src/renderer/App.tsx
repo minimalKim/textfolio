@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import * as api from './features/auth/api';
 import { updateUser } from './features/auth/slices';
@@ -27,7 +27,7 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <BaseLayout>
         <Routes>
           <Route path='/' element={<WelcomePage />} />
@@ -39,7 +39,7 @@ export default function App() {
           <Route path='/setting' element={<AuthRoute component={SettingPage} />} />
         </Routes>
       </BaseLayout>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
