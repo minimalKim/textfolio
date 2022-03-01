@@ -65,7 +65,7 @@ const authSlice = createSlice({
       state.signUp.isLoading = false;
     });
     builder.addCase(signUpUser.rejected, (state, { error }) => {
-      if (error.code) state.signIn.error = error.code;
+      if (error.code) state.signUp.error = error.code;
       state.signUp.isLoading = false;
     });
     builder.addCase(signOutUser.pending, (state) => {

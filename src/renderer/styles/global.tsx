@@ -49,6 +49,7 @@ const style = css`
   body {
     background-color: #f7fafc;
     line-height: 1;
+    font-family: 'Inter', sans-serif;
   }
   ul,
   ol,

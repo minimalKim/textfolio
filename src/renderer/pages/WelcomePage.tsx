@@ -26,7 +26,6 @@ export default function WelcomePage() {
 
   return (
     <WelcomePageWrapper>
-      <LeftSection>image</LeftSection>
       <RightSection>
         <Card padding={10} style={{ width: '550px' }}>
           {isSignInPage ? <SignInForm /> : <SignUpForm />}
@@ -52,13 +51,13 @@ const WelcomePageWrapper = styled.div`
   align-items: center;
 `;
 
-const LeftSection = styled.div`
-  background-color: orange;
-  width: 420px;
-  height: 400px;
-  margin-left: auto;
-  margin-right: auto;
-`;
+// const LeftSection = styled.div`
+//   background-color: orange;
+//   width: 420px;
+//   height: 400px;
+//   margin-left: auto;
+//   margin-right: auto;
+// `;
 
 const RightSection = styled.div`
   margin-left: auto;

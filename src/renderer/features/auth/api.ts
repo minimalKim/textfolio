@@ -41,7 +41,6 @@ export const signUp = async ({ email, password, username, avatar }: SignUpApiDat
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   const userProfile = { uid: user.uid, email, username, avatar };
   createUserProfile(userProfile);
-  return user;
 };
 
 export const signOut = () => signOutFirebase(auth);

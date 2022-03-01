@@ -35,22 +35,7 @@ type DocsState = {
 };
 
 const initialState: DocsState = {
-  documents: [
-    {
-      docId: '',
-      userId: '',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      blocks: [
-        {
-          html: '',
-          id: '',
-          tag: '',
-          isFocus: false,
-        },
-      ],
-    },
-  ],
+  documents: [],
   getDocs: {
     error: null,
     isLoading: false,

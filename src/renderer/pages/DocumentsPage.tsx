@@ -39,12 +39,14 @@ const SubSideNavBar = styled.div`
   justify-content: space-between;
   background-color: white;
   border-right: 1px solid ${({ theme }) => theme.color.gray[100]};
+  overflow: hidden;
+  overflow-y: auto;
 `;
 
 const RightSection = styled.div`
   position: absolute;
   left: 304px;
   width: calc(100vw - 304px);
-  height: 100%;
-  overflow-x: auto;
+  height: calc(100vh - 74px);
+  overflow-y: auto;
 `;
