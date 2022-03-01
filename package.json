@@ -4,15 +4,18 @@
   "main": "build/main.js",
   "license": "MIT",
   "scripts": {
-    "watch": "webpack --watch --mode=development && tsc --watch",
-    "build": "webpack --mode=production && tsc",
-    "start:react": "webpack serve --open --mode=development",
+    "watch": "webpack --watch --mode=development",
+    "build:main": "webpack --config ./webpack.main.js --mode=development",
+    "build:renderer": "webpack --config ./webpack.renderer.js --mode=production",
+    "start:browser": "webpack serve --open --mode=development --config ./webpack.renderer.js",
     "start:electron": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "make:linux": "electron-builder --linux",
     "make:macos": "electron-builder --mac",
-    "make:win": "electron-builder --win --x64"
+    "make:win": "electron-builder --win --x64",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "build": {
     "productName": "textfolio",
@@ -20,11 +23,7 @@
     "files": [
       "build/**/*",
       "assets/**/*",
-      "utils/**/*",
-      "splash.html",
-      "splash.css",
-      "main.js",
-      "preload.js"
+      "utils/**/*"
     ],
     "mac": {
       "category": "public.app-category.developer-tools",
@@ -62,14 +61,23 @@
     }
   },
   "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@heroicons/react": "^1.0.5",
+    "@reduxjs/toolkit": "^1.7.2",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
+    "dayjs": "^1.10.7",
     "dotenv-webpack": "^7.1.0",
-    "eslint": "^8.9.0",
+    "firebase": "^9.6.7",
+    "polished": "^4.1.4",
     "react": "^17.0.2",
+    "react-contenteditable": "^3.3.6",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
     "ts-loader": "^9.2.6",
     "webpack": "^5.69.0",
     "webpack-cli": "^4.9.2"
@@ -79,18 +87,33 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@emotion/babel-plugin": "^11.7.2",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/addon-knobs": "^6.4.0",
+    "@storybook/addon-links": "^6.4.19",
+    "@storybook/react": "^6.4.19",
+    "@storybook/testing-library": "^0.0.9",
     "babel-loader": "^8.2.3",
     "electron": "^17.0.1",
     "electron-builder": "^22.14.13",
     "electron-reload": "^2.0.0-alpha.1",
+    "eslint": "^8.9.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-plugin-import": "2.25.3",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
     "fork-ts-checker-webpack-plugin": "^7.2.1",
     "html-webpack-plugin": "^5.5.0",
+    "prettier": "^2.5.1",
     "typescript": "^4.5.5",
     "webpack-dev-server": "^4.7.4"
-  }
+  },
+  "peerDependencies": {}
 }
