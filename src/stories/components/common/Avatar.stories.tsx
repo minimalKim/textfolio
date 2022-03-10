@@ -2,8 +2,8 @@ import React from 'react';
 
 import { ThemeProvider } from '@emotion/react';
 
-import theme from '../../../styles/theme';
-import Avatar, { AvatarProps } from './Avatar';
+import Avatar, { AvatarProps } from '../../../renderer/components/common/Avatar';
+import theme from '../../../renderer/styles/theme';
 
 export default {
   title: 'components/Avatar',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useTimeoutFn from '../renderer/hooks/useTimeoutFn';
+import useTimeoutFn from '../../renderer/hooks/useTimeoutFn';
 
 export default {
   title: 'Hook/useTimeoutFn',

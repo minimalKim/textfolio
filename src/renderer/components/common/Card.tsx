@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 
 import { css, useTheme } from '@emotion/react';
 
-import { Radius, Size, Space } from '../../../styles/emotion';
+import { Radius, Size, Space } from '../../styles/emotion';
 
 export type CardProps = React.HTMLAttributes<HTMLDivElement> &
   PropsWithChildren<{

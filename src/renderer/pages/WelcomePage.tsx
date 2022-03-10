@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
-import Button from '../components/common/Button/Button';
-import Card from '../components/common/Card/Card';
-import Text from '../components/common/Text/Text';
+import Button from '../components/common/Button';
+import Card from '../components/common/Card';
+import Text from '../components/common/Text';
 import { SignInForm } from '../components/SignInForm';
 import { SignUpForm } from '../components/SignUpForm';
 import { useAppSelector } from '../store';

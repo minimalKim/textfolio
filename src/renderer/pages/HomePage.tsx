@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Avatar from '../components/common/Avatar/Avatar';
+import Avatar from '../components/common/Avatar';
 
 export default function HomePage() {
   return (
