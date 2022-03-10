@@ -3,8 +3,8 @@ import React from 'react';
 
 import { ThemeProvider } from '@emotion/react';
 
-import theme from '../../../styles/theme';
-import Image, { ImageProps } from './Image';
+import Image, { ImageProps } from '../../../renderer/components/common/Image';
+import theme from '../../../renderer/styles/theme';
 
 export default {
   title: 'components/Image',

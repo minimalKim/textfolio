@@ -3,8 +3,8 @@ import React from 'react';
 import { css } from '@emotion/core';
 import { ThemeProvider } from '@emotion/react';
 
-import theme from '../../../styles/theme';
-import Button from './Button';
+import Button from '../../../renderer/components/common/Button';
+import theme from '../../../renderer/styles/theme';
 
 export default {
   title: 'components/Button', // 스토리북에서 보여질 그룹과 경로를 명시

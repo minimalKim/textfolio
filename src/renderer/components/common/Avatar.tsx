@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
 
-import ImageComponent from '../Image/Image';
+import ImageComponent from './Image';
 
 export type AvatarProps = AvatarWrapperProps & {
   src?: string;

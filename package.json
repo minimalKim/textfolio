@@ -18,8 +18,8 @@
     "build-storybook": "build-storybook"
   },
   "build": {
-    "productName": "textfolio",
-    "appId": "com.mini.textfolio",
+    "productName": "Textfolio",
+    "appId": "com.mini.Textfolio",
     "files": [
       "build/**/*",
       "assets/**/*",

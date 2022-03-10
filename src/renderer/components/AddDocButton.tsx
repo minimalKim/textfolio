@@ -6,8 +6,8 @@ import { PlusIcon } from '@heroicons/react/solid';
 
 import { createUserDoc } from '../features/docs/actions';
 import { useAppDispatch, useAppSelector } from '../store';
-import Button from './common/Button/Button';
-import Text from './common/Text/Text';
+import Button from './common/Button';
+import Text from './common/Text';
 
 export default function AddDocButton() {
   const user = useAppSelector(({ auth }) => auth.user);

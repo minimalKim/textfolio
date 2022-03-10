@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { deleteUserDoc } from '../features/docs/actions';
 import { useAppDispatch } from '../store';
-import DeleteButton from './common/Button/Button';
-import Text from './common/Text/Text';
+import DeleteButton from './common/Button';
+import Text from './common/Text';
 import { Block } from './EditableBlock';
 
 type DocumentListItemProps = {

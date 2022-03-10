@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useTimeout from '../renderer/hooks/useTimeout';
+import useTimeout from '../../renderer/hooks/useTimeout';
 
 export default {
   title: 'Hook/useTimeout',
