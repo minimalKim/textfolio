@@ -4,8 +4,8 @@ import React from 'react';
 import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import theme from '../../../styles/theme';
-import Input, { InputProps } from './Input';
+import Input, { InputProps } from '../../../renderer/components/common/Input';
+import theme from '../../../renderer/styles/theme';
 
 export default {
   title: 'components/Input',

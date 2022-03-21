@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 import { signUpUser } from '../features/auth/actions';
 import useForm from '../hooks/useForm';
 import { useAppSelector } from '../store';
-import Button from './common/Button/Button';
-import Input from './common/Input/Input';
-import Text from './common/Text/Text';
+import Button from './common/Button';
+import Input from './common/Input';
+import Text from './common/Text';
 
 type FormValue = {
   username: string;

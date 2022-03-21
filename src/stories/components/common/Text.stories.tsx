@@ -2,7 +2,7 @@ import React from 'react';
 
 import { withKnobs, boolean, number } from '@storybook/addon-knobs';
 
-import Text, { TextProps } from './Text';
+import Text, { TextProps } from '../../../renderer/components/common/Text';
 
 export default {
   title: 'components/Text',

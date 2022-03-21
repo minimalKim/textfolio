@@ -5,10 +5,10 @@ import styled from '@emotion/styled';
 
 import { signOutUser } from '../features/auth/actions';
 import { useAppDispatch } from '../store';
-import Avatar from './common/Avatar/Avatar';
-import Button from './common/Button/Button';
-import Image from './common/Image/Image';
-import Text from './common/Text/Text';
+import Avatar from './common/Avatar';
+import Button from './common/Button';
+import Image from './common/Image';
+import Text from './common/Text';
 
 type SubFrameBarProps = {
   canGoBack?: boolean;
