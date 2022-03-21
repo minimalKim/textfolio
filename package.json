@@ -4,10 +4,9 @@
   "main": "build/main.js",
   "license": "MIT",
   "scripts": {
-    "watch": "webpack --watch --mode=development",
     "build:main": "webpack --config ./webpack.main.js --mode=production",
     "build:renderer": "webpack --config ./webpack.renderer.js --mode=production",
-    "start:browser": "webpack serve --open --mode=development --config ./webpack.renderer.js",
+    "start:browser": "webpack serve  --config ./webpack.renderer.js --mode=development --open",
     "start:electron": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",

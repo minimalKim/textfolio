@@ -1,6 +1,6 @@
 const path = require('path');
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, Notification: ElectronNotification } = require('electron');
 
 const isDev = !app.isPackaged;
 
@@ -9,7 +9,7 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      // preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'),
     },
   });
 
@@ -18,13 +18,11 @@ const createWindow = () => {
   isDev && win.webContents.openDevTools();
 };
 
-// if (isDev) {
-//   require('electron-reload')(__dirname, {
-//     electron: path.join(__dirname, '..', 'node_modules', '.bin', 'electron'),
-//   });
-// }
+const showNotification = (message: string) =>
+  new ElectronNotification({ title: 'Notification', body: message }).show();
 
 app.whenReady().then(() => {
+  ipcMain.on('notify', (_: Event, message: string) => showNotification(message));
   createWindow();
 
   app.on('activate', () => {

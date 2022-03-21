@@ -1,6 +1,9 @@
-window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector: string, text: string) => {
-    const element = document.getElementById(selector);
-    if (element) element.innerText = text;
-  };
+const { contextBridge, ipcRenderer } = require('electron');
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  notificationAPI: {
+    sendNotification(message: string) {
+      ipcRenderer.send('notify', message);
+    },
+  },
 });

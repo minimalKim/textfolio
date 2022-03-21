@@ -4,6 +4,7 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import * as api from './features/auth/api';
 import { updateUser } from './features/auth/slices';
+import { listenToNetworkConnectionChanges } from './features/network/actions';
 import BaseLayout from './Layout/BaseLayout';
 import DocumentsPage from './pages/DocumentsPage';
 import HomePage from './pages/HomePage';
@@ -11,6 +12,7 @@ import SearchPage from './pages/SearchPage';
 import SettingPage from './pages/SettingPage';
 import WelcomePage from './pages/WelcomePage';
 import { useAppDispatch, useAppSelector } from './store';
+import notification from './utils/notification';
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -21,8 +23,12 @@ export default function App() {
       dispatch(updateUser(userProfile));
     });
 
+    const unsubscribeNetworkConnectionChanges = dispatch(listenToNetworkConnectionChanges());
+    notification.setup();
+
     return () => {
       unsubscribeAuthStateChanges();
+      unsubscribeNetworkConnectionChanges();
     };
   }, [dispatch]);
 
